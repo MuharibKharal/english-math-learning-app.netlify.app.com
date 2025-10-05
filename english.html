@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn ABC with Sound</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Baloo 2', cursive;
+      background: linear-gradient(180deg, #cdeaff, #fef6ff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    header {
+      background: #00b4d8;
+      width: 100%;
+      padding: 20px 0;
+      color: white;
+      font-size: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #ff6f61;
+      margin: 20px 0;
+      font-size: 2.5rem;
+    }
+
+    .letters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(70px, 3fr));
+      gap: 15px;
+      width: 90%;
+      max-width: 800px;
+    }
+    footer{
+        background-color: #000000;
+        color: rgb(255, 255, 255);
+        padding: 10px 50vh;
+    }
+    .letter {
+      background: #ffd7d7;
+      border-radius: 100vh;
+      padding: 20px;
+      border: none;
+      font-size: 2rem;
+      color: #0077b6;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background 0.2s;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .letter:hover {
+      background: #ffb703;
+      color: white;
+      transform: scale(1.05);
+    }
+    .container{
+        background-color: #ff3333;
+        padding: 60px 80px;
+        margin-top: 30px;
+        border: none;
+        border-radius: 18px;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <marquee>Learn With Fun 🎈</marquee>
+  </header>
+  <div class="container">
+  <h1><font color= "white">English Alphabets (A–Z)</font></h1>
+  <div class="letters" id="letters"></div>
+  <a href="index.html">
+  <button style="background-color: cornflowerblue; padding: 10px 20px; border: none; border-radius: 8px;">Back To Home</button>
+   </a>
+</div>
+  <footer>
+    © 2025 Learn with Fun | English Alphabets with Voice
+  </footer>
+
+  <script>
+    const lettersContainer = document.getElementById('letters');
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+    letters.forEach(letter => {
+      const div = document.createElement('div');
+      div.className = 'letter';
+      div.textContent = letter;
+      div.addEventListener('click', () => speakLetter(letter));
+      lettersContainer.appendChild(div);
+    });
+
+    function speakLetter(letter) {
+      const synth = window.speechSynthesis;
+      if (!synth) {
+        alert('Sorry, speech not supported in this browser.');
+        return;
+      }
+      synth.cancel();
+      const utter = new SpeechSynthesisUtterance(letter);
+      utter.lang = 'en-US';
+      utter.pitch = 1.2;
+      utter.rate = 0.4;
+      synth.speak(utter);
+    }
+  </script>
+</body>
+</html>

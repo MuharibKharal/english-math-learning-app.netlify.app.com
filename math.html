@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn Numbers with Sound</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Baloo 2', cursive;
+      background: linear-gradient(180deg, #cdeaff, #fef6ff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    header {
+      background: #00b4d8;
+      width: 100%;
+      padding: 20px 0;
+      color: white;
+      font-size: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #ff6f61;
+      margin: 20px 0;
+      font-size: 2.5rem;
+    }
+
+    .numbers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+      gap: 15px;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    .number {
+      background: #ffffff;
+      border-radius: 50vh;
+      border: none;
+      padding: 20px;
+      font-size: 2rem;
+      color: #0077b6;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background 0.2s;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .number:hover {
+      background: #ffb703;
+      color: white;
+      transform: scale(1.05);
+    }
+        .container{
+        background-color: #ff3333;
+        padding: 60px 80px;
+        margin-top: 30px;
+        border: none;
+        border-radius: 18px;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #888;
+    }
+        footer{
+        background-color: #000000;
+        color: rgb(255, 255, 255);
+        padding: 10px 50vh;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <marquee>Learn With Fun 🎈</marquee>
+  </header>
+  <div class="container">
+  <h1><font color = "white">Numbers (1–100)</font></h1>
+
+  <div class="numbers" id="numbers"></div>
+  <a href="index.html">
+  <button style="background-color: cornflowerblue; padding: 10px 20px; border: none; border-radius: 8px;">Back To Home</button>
+   </a>
+    </div>
+  <footer>
+    © 2025 Learn with Fun | Numbers with Voice
+  </footer>
+
+  <script>
+    const numbersContainer = document.getElementById('numbers');
+    const numbers = Array.from({length: 100}, (_, i) => i + 1);
+
+    numbers.forEach(num => {
+      const div = document.createElement('div');
+      div.className = 'number';
+      div.textContent = num;
+      div.addEventListener('click', () => speakNumber(num));
+      numbersContainer.appendChild(div);
+    });
+
+    function speakNumber(num) {
+      const synth = window.speechSynthesis;
+      if (!synth) {
+        alert('Sorry, speech not supported in this browser.');
+        return;
+      }
+      synth.cancel();
+      const utter = new SpeechSynthesisUtterance(num.toString());
+      utter.lang = 'en-US';
+      utter.pitch = 1.0;
+      utter.rate = 0.5; // slower for clear pronunciation
+      synth.speak(utter);
+    }
+  </script>
+</body>
+</html>
